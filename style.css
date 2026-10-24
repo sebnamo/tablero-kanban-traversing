@@ -1,0 +1,161 @@
+/* ===== Variables de color ===== */
+:root {
+  --fondo: #f1f3f7;
+  --texto: #1f2933;
+  --gris: #6b7280;
+  --borde: #d9dee7;
+  --azul: #2563eb;
+  --amarillo: #f59e0b;
+  --verde: #16a34a;
+  --rojo: #dc2626;
+}
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  padding: 24px 16px;
+}
+
+/* ===== Encabezado ===== */
+.encabezado {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.encabezado p {
+  color: var(--gris);
+  font-size: 0.9rem;
+}
+
+/* ===== Formulario (Create) ===== */
+.formulario {
+  display: flex;
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.formulario input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* ===== Botones ===== */
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn-agregar  { background: var(--azul); padding: 10px 18px; font-size: 1rem; }
+.btn-mover    { background: var(--gris); }
+.btn-editar   { background: var(--amarillo); }
+.btn-eliminar { background: var(--rojo); }
+
+/* ===== Tablero: las 3 columnas lado a lado ===== */
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.columna {
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  min-height: 300px;
+  border-top: 5px solid var(--gris);
+}
+
+/* Un color distinto arriba de cada columna */
+.columna[data-estado="por-hacer"]   { border-top-color: var(--azul); }
+.columna[data-estado="en-progreso"] { border-top-color: var(--amarillo); }
+.columna[data-estado="hecho"]       { border-top-color: var(--verde); }
+
+.columna-titulo {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+/* ===== Lista de tareas ===== */
+.lista-tareas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Caso límite: lista vacía. Si el ul no tiene hijos, se muestra este mensaje */
+.lista-tareas:empty::after {
+  content: "Sin tareas";
+  color: var(--gris);
+  font-style: italic;
+  text-align: center;
+  padding: 20px 0;
+  border: 2px dashed var(--borde);
+  border-radius: 8px;
+}
+
+/* ===== Tarjeta de tarea ===== */
+.tarea {
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.tarea-texto {
+  display: block;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+/* Campo que aparecerá al presionar "Editar" (etapa 3) */
+.tarea-input {
+  width: 100%;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--azul);
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.tarea-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Casos límite: en la primera columna no se puede ir a la anterior,
+   y en la última no se puede ir a la siguiente */
+.columna:first-child [data-accion="anterior"],
+.columna:last-child  [data-accion="siguiente"] {
+  visibility: hidden;
+}
+
+/* ===== Celular: columnas una debajo de otra ===== */
+@media (max-width: 760px) {
+  .tablero {
+    grid-template-columns: 1fr;
+  }
+}

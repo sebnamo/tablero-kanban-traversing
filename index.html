@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablero Kanban</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="encabezado">
+    <h1>Tablero Kanban</h1>
+    <p>Proyecto 6 · DOM Traversing</p>
+  </header>
+
+  <!-- CREATE: formulario para agregar una tarea nueva (entra en "Por hacer") -->
+  <form id="form-tarea" class="formulario">
+    <input type="text" id="input-tarea" placeholder="Escribe una tarea nueva..." autocomplete="off">
+    <button type="submit" class="btn btn-agregar">Agregar</button>
+  </form>
+
+  <!-- CONTENEDOR: aquí irá el único addEventListener (delegación de eventos) -->
+  <main id="tablero" class="tablero">
+
+    <!-- Las 3 columnas son HERMANAS: nextElementSibling / previousElementSibling
+         nos llevan de una columna a la siguiente o a la anterior -->
+    <section class="columna" data-estado="por-hacer">
+      <h2 class="columna-titulo">Por hacer</h2>
+      <!-- Las listas empiezan vacías (sin espacios dentro del ul) para que el CSS muestre "Sin tareas".
+           Las tareas se crean con JavaScript -->
+      <ul class="lista-tareas"></ul>
+    </section>
+
+    <section class="columna" data-estado="en-progreso">
+      <h2 class="columna-titulo">En progreso</h2>
+      <ul class="lista-tareas"></ul>
+    </section>
+
+    <section class="columna" data-estado="hecho">
+      <h2 class="columna-titulo">Hecho</h2>
+      <ul class="lista-tareas"></ul>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
